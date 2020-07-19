@@ -123,7 +123,7 @@ namespace CalcSpecs.Calculator
         {
             var calculator = new RomanCalculator(String.Empty);
             
-            Assert.IsTrue(calculator.IsOperator("x"));
+            Assert.IsTrue(calculator.IsOperator("*"));
         }
     }
 }
