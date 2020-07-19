@@ -1,5 +1,5 @@
 using System.Collections.Generic;
-using System.Globalization;
+using System.Globalization;    
 
 namespace Calc.Calculator
 {
@@ -37,29 +37,70 @@ namespace Calc.Calculator
             
             Stack<double> numbers = new Stack<double>();
             Stack<string> operators = new Stack<string>();
+            bool flag = false;
+            bool wait = false;
             
-            foreach (var part in parts)
+            for (int i = 0; i < parts.Length; i++)
             {
+                var part = parts[i];
+                
                 // Check if the term is an integer and add it to the integers stack
                 int number = 0;
                 if (int.TryParse(part, out number))
                 {
                     numbers.Push(number);
+
+                    if (i != parts.Length - 1 && operators.Count > 0 && Precedence(parts[i + 1]) > Precedence(operators.Peek()))
+                    {
+                        wait = true;
+                    }
                 }
 
                 // Check if the term is an operator and add it to the operators stack
                 if (IsOperator(part))
                 {
+                    if (operators.Count >= 1 && Precedence(part) > Precedence(operators.Peek()))
+                    {
+                        flag = true;
+                        operators.Push(part);
+                        continue;
+                    }
+                    
                     operators.Push(part);
+                    
+                }
+
+                if (flag)
+                {
+                    numbers.Push(PerformOperation(numbers, operators));
+                    wait = false;
+                    flag = false;
                 }
                 
-                if(numbers.Count == 2)
+                if(numbers.Count == 2 && !wait)
                     numbers.Push(PerformOperation(numbers, operators));
                 
             }
 
             return numbers.Pop();
 
+        }
+
+        private int Precedence(string check)
+        {
+            switch (check)
+            {
+                case "*":
+                    return 2;
+                case "/":
+                    return 2;
+                case "+":
+                    return 1;
+                case "-":
+                    return 1;
+                default:
+                    return -1;
+            }
         }
 
         private double PerformOperation(Stack<double> numbers, Stack<string> operators)

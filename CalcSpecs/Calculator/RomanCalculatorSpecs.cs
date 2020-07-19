@@ -164,6 +164,22 @@ namespace CalcSpecs.Calculator
         }
 
         [Test]
+        public void Should_Perform_Multiplication_Before_Addition()
+        {
+            var multiplicationIsFirstInExpression = "I * II + III";
+            
+            var calculator = new RomanCalculator(multiplicationIsFirstInExpression);
+
+           Assert.AreEqual(5, calculator.Result());
+            
+            var multiplicationIsSecondInExpression = "I + II * III";
+            
+            calculator = new RomanCalculator(multiplicationIsSecondInExpression);
+
+            Assert.AreEqual(7, calculator.Result());
+        }
+
+        [Test]
         public void Should_Identify_Plus_Operator()
         {
             var calculator = new RomanCalculator(String.Empty);
