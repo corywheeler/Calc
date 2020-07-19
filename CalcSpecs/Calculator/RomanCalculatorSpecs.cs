@@ -135,5 +135,13 @@ namespace CalcSpecs.Calculator
             
             Assert.IsTrue(calculator.IsOperator("*"));
         }
+        
+        [Test]
+        public void Should_Identify_Division_Operator()
+        {
+            var calculator = new RomanCalculator(String.Empty);
+            
+            Assert.IsTrue(calculator.IsOperator("/"));
+        }
     }
 }

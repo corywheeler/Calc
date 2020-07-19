@@ -101,7 +101,8 @@ namespace Calc.Calculator
         {
             return potentialOperator.Equals("+") || 
                    potentialOperator.Equals("-") ||
-                   potentialOperator.Equals("*");
+                   potentialOperator.Equals("*") ||
+                   potentialOperator.Equals("/");
         }
     }
 }
