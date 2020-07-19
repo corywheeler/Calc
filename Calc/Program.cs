@@ -1,4 +1,5 @@
 ﻿using System;
+using Calc.Calculator;
 using Calc.Utility;
 
 namespace Calc
@@ -12,7 +13,7 @@ namespace Calc
             if (args.Length > 0)
             {
                 expression = InputCleaner.Clean(args[0]);
-                Console.WriteLine("{0}: Roman Numeral Calculator", expression);
+                Console.WriteLine("{0}", new RomanCalculator(expression).Result());
             }
             else
             {
