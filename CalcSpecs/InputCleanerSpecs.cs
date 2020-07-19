@@ -14,5 +14,14 @@ namespace CalcSpecs
             
             Assert.AreEqual(expected, InputCleaner.Clean(input));
         }
+
+        [Test]
+        public void Passing_Null_Gives_Empty_String()
+        {
+            string input = null;
+            var expected = string.Empty;
+            
+            Assert.AreEqual(expected, InputCleaner.Clean(input));
+        }
     }
 }
