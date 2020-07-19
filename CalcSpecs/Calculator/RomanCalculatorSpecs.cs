@@ -1,3 +1,4 @@
+using System;
 using Calc.Calculator;
 using NUnit.Framework;
 
@@ -89,8 +90,17 @@ namespace CalcSpecs.Calculator
             
             Assert.AreEqual(expected, calculator.ConvertToIntegerExpression());
         }
-
         
+        [Test]
+        public void Should_Add_Two_Roman_Numbers()
+        {
+            var expression = "I + II";
+            
+            var calculator = new RomanCalculator(expression);
+            
+            Assert.AreEqual(3, calculator.Result());
+        }
+
         [Test]
         public void Should_Identify_Plus_Operator()
         {

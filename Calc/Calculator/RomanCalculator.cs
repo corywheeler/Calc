@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Globalization;
 
 namespace Calc.Calculator
 {
@@ -27,7 +28,44 @@ namespace Calc.Calculator
 
         public double Result()
         {
-            return _numeralMapping.ContainsKey(_expression) ? _numeralMapping[_expression] : 0;
+            return _numeralMapping.ContainsKey(_expression) ? _numeralMapping[_expression] : Calculate();
+        }
+
+        private double Calculate()
+        {
+            var parts = ConvertToIntegerExpression().Split(' ');
+            
+            Stack<int> numbers = new Stack<int>();
+            Stack<string> operators = new Stack<string>();
+            
+            foreach (var part in parts)
+            {
+                // Check if the term is an integer and add it to the integers stack
+                int number = 0;
+                if (int.TryParse(part, out number))
+                {
+                    numbers.Push(number);
+                }
+
+                // Check if the term is an operator and add it to the operators stack
+                if (IsOperator(part))
+                {
+                    operators.Push(part);
+                }
+                
+            }
+
+            // Pull of the top operator in the operators stack and apply it's operation on the top two numbers
+            // from the numbers stack.
+            switch (operators.Pop())
+            {
+                case "+":
+                    var secondOperand = numbers.Pop();
+                    var firstOperand = numbers.Pop();
+                    return firstOperand + secondOperand;
+                default:
+                    return 0;
+            }
         }
 
         public string ConvertToIntegerExpression()
