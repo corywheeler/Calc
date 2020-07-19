@@ -6,7 +6,12 @@ namespace Calc
     {
         public static void Main(string[] args)
         {
-            Console.WriteLine("{0}: Roman Numeral Calculator", args[0]);
+            string expression = string.Empty;
+
+            if (args.Length > 0)
+                expression = InputCleaner.Clean(args[0]);
+            
+            Console.WriteLine("{0}: Roman Numeral Calculator", expression);
          }
     }
 }
