@@ -52,5 +52,14 @@ namespace CalcSpecs.Calculator
             Assert.AreEqual(4, calculator.Result());    
         }
         
+        [Test]
+        public void Should_Return_0_For_Non_Roman_Numbers()
+        {
+            var expression = "NOT_A_ROMAN_NUMBER";
+            var calculator = new RomanCalculator(expression);
+            
+            Assert.AreEqual(0, calculator.Result());    
+        }
+        
     }
 }

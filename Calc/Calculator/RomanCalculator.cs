@@ -25,7 +25,7 @@ namespace Calc.Calculator
 
         public double Result()
         {
-            return _numeralMapping[_expression];
+            return _numeralMapping.ContainsKey(_expression) ? _numeralMapping[_expression] : 0;
         }
     }
 }
