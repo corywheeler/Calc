@@ -95,7 +95,9 @@ namespace Calc.Calculator
         // Will tell you if a value is an operator
         public bool IsOperator(string potentialOperator)
         {
-            return potentialOperator.Equals("+") || potentialOperator.Equals("-");
+            return potentialOperator.Equals("+") || 
+                   potentialOperator.Equals("-") ||
+                   potentialOperator.Equals("x");
         }
     }
 }
