@@ -18,6 +18,7 @@ namespace Calc.Calculator
         {
             _numeralMapping["I"] = 1;
             _numeralMapping["II"] = 2;
+            _numeralMapping["III"] = 3;
             _numeralMapping["IV"] = 4;
             _numeralMapping["V"] = 5;
             _numeralMapping["VI"] = 6;
