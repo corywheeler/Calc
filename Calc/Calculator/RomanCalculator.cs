@@ -57,12 +57,18 @@ namespace Calc.Calculator
 
             // Pull of the top operator in the operators stack and apply it's operation on the top two numbers
             // from the numbers stack.
+            int firstOperand;
+            int secondOperand;
             switch (operators.Pop())
             {
                 case "+":
-                    var secondOperand = numbers.Pop();
-                    var firstOperand = numbers.Pop();
+                    secondOperand = numbers.Pop();
+                    firstOperand = numbers.Pop();
                     return firstOperand + secondOperand;
+                case "-":
+                    secondOperand = numbers.Pop();
+                    firstOperand = numbers.Pop();
+                    return firstOperand - secondOperand;
                 default:
                     return 0;
             }

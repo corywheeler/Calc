@@ -91,6 +91,16 @@ namespace CalcSpecs.Calculator
             
             Assert.AreEqual(3, calculator.Result());
         }
+        
+        [Test]
+        public void Should_Subtract_Two_Roman_Numbers()
+        {
+            var expression = "I - II";
+            
+            var calculator = new RomanCalculator(expression);
+            
+            Assert.AreEqual(-1, calculator.Result());
+        }
 
         [Test]
         public void Should_Identify_Plus_Operator()
