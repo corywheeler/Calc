@@ -111,6 +111,16 @@ namespace CalcSpecs.Calculator
             
             Assert.AreEqual(2, calculator.Result());
         }
+        
+        [Test]
+        public void Should_Divide_Two_Roman_Numbers()
+        {
+            var expression = "I / II";
+            
+            var calculator = new RomanCalculator(expression);
+            
+            Assert.AreEqual(0.5, calculator.Result());
+        }
 
         [Test]
         public void Should_Identify_Plus_Operator()

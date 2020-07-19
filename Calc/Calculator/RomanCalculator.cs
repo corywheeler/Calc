@@ -57,8 +57,8 @@ namespace Calc.Calculator
 
             // Pull of the top operator in the operators stack and apply it's operation on the top two numbers
             // from the numbers stack.
-            int firstOperand;
-            int secondOperand;
+            double firstOperand;
+            double secondOperand;
             switch (operators.Pop())
             {
                 case "+":
@@ -73,6 +73,10 @@ namespace Calc.Calculator
                     secondOperand = numbers.Pop();
                     firstOperand = numbers.Pop();
                     return firstOperand * secondOperand;
+                case "/":
+                    secondOperand = numbers.Pop();
+                    firstOperand = numbers.Pop();
+                    return firstOperand / secondOperand;
                 default:
                     return 0;
             }
