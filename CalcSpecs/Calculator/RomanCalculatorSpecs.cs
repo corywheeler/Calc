@@ -53,6 +53,15 @@ namespace CalcSpecs.Calculator
         }
         
         [Test]
+        public void Should_Return_2_For_II()
+        {
+            var expression = "II";
+            var calculator = new RomanCalculator(expression);
+            
+            Assert.AreEqual(2, calculator.Result());    
+        }
+        
+        [Test]
         public void Should_Return_0_For_Non_Roman_Numbers()
         {
             var expression = "NOT_A_ROMAN_NUMBER";
