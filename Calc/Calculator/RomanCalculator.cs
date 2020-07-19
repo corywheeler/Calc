@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+
 namespace Calc.Calculator
 {
     public class RomanCalculator
@@ -10,6 +12,7 @@ namespace Calc.Calculator
             _expression = expression;
             _numeralMapping["I"] = 1;
             _numeralMapping["V"] = 5;
+            _numeralMapping["X"] = 10;
         }
 
         public double Result()
