@@ -78,6 +78,18 @@ namespace CalcSpecs.Calculator
             
             Assert.AreEqual(0, calculator.Result());    
         }
+
+        [Test]
+        public void Should_Convert_Roman_Expression_To_Integer_Expression()
+        {
+            var expression = "I + II + III * ( V - I )";
+            var expected = "1 + 2 + 3 * ( 5 - 1 )";
+            
+            var calculator = new RomanCalculator(expression);
+            
+            Assert.AreEqual(expected, calculator.ConvertToIntegerExpression());
+        }
+
         
     }
 }

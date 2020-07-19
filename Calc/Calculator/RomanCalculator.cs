@@ -29,5 +29,23 @@ namespace Calc.Calculator
         {
             return _numeralMapping.ContainsKey(_expression) ? _numeralMapping[_expression] : 0;
         }
+
+        public string ConvertToIntegerExpression()
+        {
+            string newExpression = string.Empty;
+            var terms = _expression.Split(' ');
+            
+            foreach (var term in terms)
+            {
+                if (_numeralMapping.ContainsKey(term))
+                    newExpression += _numeralMapping[term].ToString(CultureInfo.InvariantCulture) + " ";
+                else
+                {
+                    newExpression += term + " ";
+                }
+            }
+            
+            return newExpression.Trim();
+        }
     }
 }
