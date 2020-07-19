@@ -1,6 +1,6 @@
 using System;
 
-namespace Calc
+namespace Calc.Utility
 {
     public static class InputCleaner
     {

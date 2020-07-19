@@ -1,7 +1,7 @@
-using Calc;
+using Calc.Utility;
 using NUnit.Framework;
 
-namespace CalcSpecs
+namespace CalcSpecs.Utility
 {
     [TestFixture]
     public class InputCleanerSpecs
