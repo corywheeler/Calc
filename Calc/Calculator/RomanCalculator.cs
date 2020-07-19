@@ -53,9 +53,12 @@ namespace Calc.Calculator
                     operators.Push(part);
                 }
                 
+                if(numbers.Count == 2)
+                    numbers.Push(PerformOperation(numbers, operators));
+                
             }
 
-            return PerformOperation(numbers, operators);
+            return numbers.Pop();
 
         }
 

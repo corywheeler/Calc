@@ -121,6 +121,47 @@ namespace CalcSpecs.Calculator
             
             Assert.AreEqual(0.5, calculator.Result());
         }
+        
+        
+        [Test]
+        public void Should_Add_Three_Roman_Numbers()
+        {
+            var expression = "I + II + III";
+            
+            var calculator = new RomanCalculator(expression);
+            
+            Assert.AreEqual(6, calculator.Result());
+        }
+        
+        [Test]
+        public void Should_Subtract_Three_Roman_Numbers()
+        {
+            var expression = "I - II - III";
+            
+            var calculator = new RomanCalculator(expression);
+            
+            Assert.AreEqual(-4, calculator.Result());
+        }
+        
+        [Test]
+        public void Should_Multiply_Three_Roman_Numbers()
+        {
+            var expression = "I * II * III";
+            
+            var calculator = new RomanCalculator(expression);
+            
+            Assert.AreEqual(6, calculator.Result());
+        }
+        
+        [Test]
+        public void Should_Divide_Three_Roman_Numbers()
+        {
+            var expression = "I / II / III";
+            
+            var calculator = new RomanCalculator(expression);
+            
+            Assert.AreEqual(0.16666666666666666, calculator.Result());
+        }
 
         [Test]
         public void Should_Identify_Plus_Operator()
@@ -153,5 +194,6 @@ namespace CalcSpecs.Calculator
             
             Assert.IsTrue(calculator.IsOperator("/"));
         }
+
     }
 }
