@@ -37,8 +37,8 @@ namespace Calc.Calculator
             
             Stack<double> numbers = new Stack<double>();
             Stack<string> operators = new Stack<string>();
-            bool flag = false;
-            bool wait = false;
+            bool processNext = false;
+            bool waitToProcess = false;
             
             for (int i = 0; i < parts.Length; i++)
             {
@@ -52,7 +52,7 @@ namespace Calc.Calculator
 
                     if (i != parts.Length - 1 && operators.Count > 0 && Precedence(parts[i + 1]) > Precedence(operators.Peek()))
                     {
-                        wait = true;
+                        waitToProcess = true;
                     }
                 }
 
@@ -61,7 +61,7 @@ namespace Calc.Calculator
                 {
                     if (operators.Count >= 1 && Precedence(part) > Precedence(operators.Peek()))
                     {
-                        flag = true;
+                        processNext = true;
                         operators.Push(part);
                         continue;
                     }
@@ -70,14 +70,14 @@ namespace Calc.Calculator
                     
                 }
 
-                if (flag)
+                if (processNext)
                 {
                     numbers.Push(PerformOperation(numbers, operators));
-                    wait = false;
-                    flag = false;
+                    waitToProcess = false;
+                    processNext = false;
                 }
                 
-                if(numbers.Count == 2 && !wait)
+                if(numbers.Count == 2 && !waitToProcess)
                     numbers.Push(PerformOperation(numbers, operators));
                 
             }
