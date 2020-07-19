@@ -7,10 +7,10 @@ namespace CalcSpecs
     public class InputCleanerSpecs
     {
         [Test]
-        public void Should_Remove_WhiteSpace_From_The_Ends()
+        public void Should_Remove_AllWhiteSpace()
         {
             var input = "   I    +    I    ";
-            var expected = "I    +    I";
+            var expected = "I + I";
             
             Assert.AreEqual(expected, InputCleaner.Clean(input));
         }

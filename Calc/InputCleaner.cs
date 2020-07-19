@@ -9,8 +9,12 @@ namespace Calc
             if(string.IsNullOrEmpty(input))
                 return String.Empty;
             
-            var trimmedInput = input.Trim();
-            return trimmedInput;
+            return RemoveAllWhiteSpace(input);
+        }
+
+        private static string RemoveAllWhiteSpace(string input)
+        {
+            return String.Join(" ", input.Split(new string[] { " " }, StringSplitOptions.RemoveEmptyEntries));
         }
     }
 }
