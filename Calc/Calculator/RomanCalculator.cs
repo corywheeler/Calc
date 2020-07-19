@@ -11,6 +11,7 @@ namespace Calc.Calculator
         {
             _expression = expression;
             _numeralMapping["I"] = 1;
+            _numeralMapping["IV"] = 4;
             _numeralMapping["V"] = 5;
             _numeralMapping["VI"] = 6;
             _numeralMapping["X"] = 10;
