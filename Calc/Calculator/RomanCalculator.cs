@@ -10,6 +10,12 @@ namespace Calc.Calculator
         public RomanCalculator(string expression)
         {
             _expression = expression;
+            InitializeNumeralMapping();
+
+        }
+
+        private void InitializeNumeralMapping()
+        {
             _numeralMapping["I"] = 1;
             _numeralMapping["IV"] = 4;
             _numeralMapping["V"] = 5;
