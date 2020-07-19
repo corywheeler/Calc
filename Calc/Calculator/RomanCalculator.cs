@@ -35,7 +35,7 @@ namespace Calc.Calculator
         {
             var parts = ConvertToIntegerExpression().Split(' ');
             
-            Stack<int> numbers = new Stack<int>();
+            Stack<double> numbers = new Stack<double>();
             Stack<string> operators = new Stack<string>();
             
             foreach (var part in parts)
@@ -55,6 +55,12 @@ namespace Calc.Calculator
                 
             }
 
+            return PerformOperation(numbers, operators);
+
+        }
+
+        private double PerformOperation(Stack<double> numbers, Stack<string> operators)
+        {
             // Pull of the top operator in the operators stack and apply it's operation on the top two numbers
             // from the numbers stack.
             double firstOperand;
