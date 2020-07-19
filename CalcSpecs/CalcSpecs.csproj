@@ -42,6 +42,7 @@
         </Reference>
     </ItemGroup>
     <ItemGroup>
+        <Compile Include="Calculator\RomanCalculatorSpecs.cs" />
         <Compile Include="Tests.cs" />
         <Compile Include="Properties\AssemblyInfo.cs" />
         <Compile Include="Utility\InputCleanerSpecs.cs" />
