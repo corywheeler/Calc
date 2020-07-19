@@ -69,6 +69,10 @@ namespace Calc.Calculator
                     secondOperand = numbers.Pop();
                     firstOperand = numbers.Pop();
                     return firstOperand - secondOperand;
+                case "*":
+                    secondOperand = numbers.Pop();
+                    firstOperand = numbers.Pop();
+                    return firstOperand * secondOperand;
                 default:
                     return 0;
             }
