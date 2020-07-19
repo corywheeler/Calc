@@ -91,5 +91,12 @@ namespace CalcSpecs.Calculator
         }
 
         
+        [Test]
+        public void Should_Identify_Plus_Operator()
+        {
+            var calculator = new RomanCalculator(String.Empty);
+            
+            Assert.IsTrue(calculator.IsOperator("+"));
+        }
     }
 }

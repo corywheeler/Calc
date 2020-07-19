@@ -47,5 +47,11 @@ namespace Calc.Calculator
             
             return newExpression.Trim();
         }
+
+        // Will tell you if a value is an operator
+        public bool IsOperator(string potentialOperator)
+        {
+            return potentialOperator.Equals("+");
+        }
     }
 }
