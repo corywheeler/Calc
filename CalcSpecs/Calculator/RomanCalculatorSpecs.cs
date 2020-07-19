@@ -16,5 +16,14 @@ namespace CalcSpecs.Calculator
             Assert.AreEqual(1, calculator.Result());
         }
         
+        [Test]
+        public void Should_Return_5_For_V()
+        {
+            var expression = "V";
+            var calculator = new RomanCalculator("V");
+            
+            Assert.AreEqual(5, calculator.Result());
+        }
+
     }
 }
