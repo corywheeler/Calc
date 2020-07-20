@@ -160,7 +160,7 @@ namespace CalcSpecs.Calculator
             
             var calculator = new RomanCalculator(expression);
             
-            Assert.AreEqual(0.16666666666666666, calculator.Result());
+            Assert.AreEqual(0.166, calculator.Result());
         }
 
         [Test]

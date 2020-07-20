@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Globalization;    
 
@@ -82,7 +83,7 @@ namespace Calc.Calculator
                 
             }
 
-            return numbers.Pop();
+            return Math.Truncate(1000 * numbers.Pop()) / 1000;
 
         }
 
