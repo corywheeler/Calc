@@ -180,6 +180,23 @@ namespace CalcSpecs.Calculator
         }
 
         [Test]
+        public void Should_Process_Parenthesis_Before_Anything_Else()
+        {
+            var parensFirstInExpression = "( I + II ) * III";
+            
+            var calculator = new RomanCalculator(parensFirstInExpression);
+
+            Assert.AreEqual(9, calculator.Result());
+            
+            var parensLastInExpression = "I * ( II + III )";
+            
+            calculator = new RomanCalculator(parensLastInExpression);
+            
+            Assert.AreEqual(5, calculator.Result());
+
+        }
+
+        [Test]
         public void Should_Identify_Plus_Operator()
         {
             var calculator = new RomanCalculator(String.Empty);
