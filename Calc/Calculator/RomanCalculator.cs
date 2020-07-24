@@ -51,6 +51,7 @@ namespace Calc.Calculator
                 {
                     numbers.Push(number);
 
+                    // Peek ahead to see if the next item should be processed prior to the current one.
                     if (i != parts.Length - 1 && operators.Count > 0 && Precedence(parts[i + 1]) > Precedence(operators.Peek()))
                     {
                         waitToProcess = true;
@@ -60,6 +61,7 @@ namespace Calc.Calculator
                 // Check if the term is an operator and add it to the operators stack
                 if (IsOperator(part))
                 {
+                    // If the current operator has a higher precedence than the top operator ont the stack, process it next.
                     if (operators.Count >= 1 && Precedence(part) > Precedence(operators.Peek()))
                     {
                         processNext = true;
