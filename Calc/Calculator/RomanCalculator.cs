@@ -21,7 +21,7 @@ namespace Calc.Calculator
             
             Stack<double> numbers = new Stack<double>();
             Stack<string> operators = new Stack<string>();
-            bool processNext = false;
+            bool processHigherPrecedenceOperator = false;
             
             for (int i = 0; i < parts.Length; i++)
             {
@@ -37,10 +37,9 @@ namespace Calc.Calculator
                 // Check if the term is an operator and add it to the operators stack
                 if (IsOperator(part))
                 {
-                    // If the current operator has a higher precedence than the top operator ont the stack, process it next.
-                    if (operators.Count >= 1 && Precedence(part) > Precedence(operators.Peek()))
+                    if (CurrentOperatorHasHigherPrecedance(operators, part))
                     {
-                        processNext = true;
+                        processHigherPrecedenceOperator = true;
                         operators.Push(part);
                         continue;
                     }
@@ -48,10 +47,10 @@ namespace Calc.Calculator
                     operators.Push(part);
                 }
 
-                if (processNext)
+                if (processHigherPrecedenceOperator)
                 {
                     numbers.Push(PerformOperation(numbers, operators));
-                    processNext = false;
+                    processHigherPrecedenceOperator = false;
                 }
                 
                 if(numbers.Count == 2 && !NextOperatorHasHigherPrecedence(i, parts, operators))
@@ -61,12 +60,10 @@ namespace Calc.Calculator
             return Math.Truncate(1000 * numbers.Pop()) / 1000;
         }
 
-        private bool NextOperatorHasHigherPrecedence(int partsIndex, string[] parts, Stack<string> operators)
+        private bool CurrentOperatorHasHigherPrecedance(Stack<string> operators, string part)
         {
-            return partsIndex != parts.Length - 1 && 
-                   operators.Count > 0 &&
-                   IsOperator(parts[partsIndex + 1]) &&
-                   Precedence(parts[partsIndex + 1]) > Precedence(operators.Peek());
+            // If the current operator has a higher precedence than the top operator ont the stack, process it next.
+            return operators.Count >= 1 && IsOperator(part) && Precedence(part) > Precedence(operators.Peek());
         }
 
         public string ConvertToIntegerExpression()
@@ -102,6 +99,14 @@ namespace Calc.Calculator
             _numeralMapping["V"] = 5;
             _numeralMapping["VI"] = 6;
             _numeralMapping["X"] = 10;
+        }
+        
+        private bool NextOperatorHasHigherPrecedence(int partsIndex, string[] parts, Stack<string> operators)
+        {
+            return partsIndex != parts.Length - 1 && 
+                   operators.Count > 0 &&
+                   IsOperator(parts[partsIndex + 1]) &&
+                   Precedence(parts[partsIndex + 1]) > Precedence(operators.Peek());
         }
         
         private int Precedence(string check)
