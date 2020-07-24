@@ -13,7 +13,6 @@ namespace Calc.Calculator
         {
             _expression = expression;
             InitializeNumeralMapping();
-
         }
         
         private double Calculate()
@@ -23,7 +22,6 @@ namespace Calc.Calculator
             Stack<double> numbers = new Stack<double>();
             Stack<string> operators = new Stack<string>();
             bool processNext = false;
-            bool waitToProcess = false;
             
             for (int i = 0; i < parts.Length; i++)
             {
@@ -34,12 +32,6 @@ namespace Calc.Calculator
                 if (int.TryParse(part, out number))
                 {
                     numbers.Push(number);
-
-                    // Peek ahead to see if the next item should be processed prior to the current one.
-                    if (i != parts.Length - 1 && operators.Count > 0 && Precedence(parts[i + 1]) > Precedence(operators.Peek()))
-                    {
-                        waitToProcess = true;
-                    }
                 }
 
                 // Check if the term is an operator and add it to the operators stack
@@ -54,25 +46,29 @@ namespace Calc.Calculator
                     }
                     
                     operators.Push(part);
-                    
                 }
 
                 if (processNext)
                 {
                     numbers.Push(PerformOperation(numbers, operators));
-                    waitToProcess = false;
                     processNext = false;
                 }
                 
-                if(numbers.Count == 2 && !waitToProcess)
+                if(numbers.Count == 2 && !NextOperatorHasHigherPrecedence(i, parts, operators))
                     numbers.Push(PerformOperation(numbers, operators));
-                
             }
 
             return Math.Truncate(1000 * numbers.Pop()) / 1000;
-
         }
-        
+
+        private bool NextOperatorHasHigherPrecedence(int partsIndex, string[] parts, Stack<string> operators)
+        {
+            return partsIndex != parts.Length - 1 && 
+                   operators.Count > 0 &&
+                   IsOperator(parts[partsIndex + 1]) &&
+                   Precedence(parts[partsIndex + 1]) > Precedence(operators.Peek());
+        }
+
         public string ConvertToIntegerExpression()
         {
             string newExpression = string.Empty;
