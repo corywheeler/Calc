@@ -12,7 +12,7 @@ namespace CalcSpecs.Calculator
         public void Should_Return_1_For_I()
         {
             var expression = "I";
-            var calculator = new RomanCalculator("I");
+            var calculator = new RomanCalculator(expression);
             
             Assert.AreEqual(1, calculator.Result());
         }
@@ -21,7 +21,7 @@ namespace CalcSpecs.Calculator
         public void Should_Return_5_For_V()
         {
             var expression = "V";
-            var calculator = new RomanCalculator("V");
+            var calculator = new RomanCalculator(expression);
             
             Assert.AreEqual(5, calculator.Result());
         }
