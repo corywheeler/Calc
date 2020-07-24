@@ -15,23 +15,7 @@ namespace Calc.Calculator
             InitializeNumeralMapping();
 
         }
-
-        private void InitializeNumeralMapping()
-        {
-            _numeralMapping["I"] = 1;
-            _numeralMapping["II"] = 2;
-            _numeralMapping["III"] = 3;
-            _numeralMapping["IV"] = 4;
-            _numeralMapping["V"] = 5;
-            _numeralMapping["VI"] = 6;
-            _numeralMapping["X"] = 10;
-        }
-
-        public double Result()
-        {
-            return _numeralMapping.ContainsKey(_expression) ? _numeralMapping[_expression] : Calculate();
-        }
-
+        
         private double Calculate()
         {
             var parts = ConvertToIntegerExpression().Split(' ');
@@ -88,7 +72,42 @@ namespace Calc.Calculator
             return Math.Truncate(1000 * numbers.Pop()) / 1000;
 
         }
+        
+        public string ConvertToIntegerExpression()
+        {
+            string newExpression = string.Empty;
+            var terms = _expression.Split(' ');
+            
+            foreach (var term in terms)
+            {
+                if (_numeralMapping.ContainsKey(term))
+                    newExpression += _numeralMapping[term].ToString(CultureInfo.InvariantCulture) + " ";
+                else
+                {
+                    newExpression += term + " ";
+                }
+            }
+            
+            return newExpression.Trim();
+        }
 
+        // Will tell you if a value is an operator
+        public bool IsOperator(string potentialOperator)
+        {
+            return  potentialOperator.IndexOfAny(new char[] {'+', '-', '*', '/'}) >= 0;
+        }
+
+        private void InitializeNumeralMapping()
+        {
+            _numeralMapping["I"] = 1;
+            _numeralMapping["II"] = 2;
+            _numeralMapping["III"] = 3;
+            _numeralMapping["IV"] = 4;
+            _numeralMapping["V"] = 5;
+            _numeralMapping["VI"] = 6;
+            _numeralMapping["X"] = 10;
+        }
+        
         private int Precedence(string check)
         {
             switch (check)
@@ -105,7 +124,7 @@ namespace Calc.Calculator
                     return -1;
             }
         }
-
+        
         private double PerformOperation(Stack<double> numbers, Stack<string> operators)
         {
             // Pull of the top operator in the operators stack and apply it's operation on the top two numbers
@@ -134,29 +153,10 @@ namespace Calc.Calculator
                     return 0;
             }
         }
-
-        public string ConvertToIntegerExpression()
+        
+        public double Result()
         {
-            string newExpression = string.Empty;
-            var terms = _expression.Split(' ');
-            
-            foreach (var term in terms)
-            {
-                if (_numeralMapping.ContainsKey(term))
-                    newExpression += _numeralMapping[term].ToString(CultureInfo.InvariantCulture) + " ";
-                else
-                {
-                    newExpression += term + " ";
-                }
-            }
-            
-            return newExpression.Trim();
-        }
-
-        // Will tell you if a value is an operator
-        public bool IsOperator(string potentialOperator)
-        {
-            return  potentialOperator.IndexOfAny(new char[] {'+', '-', '*', '/'}) >= 0;
+            return _numeralMapping.ContainsKey(_expression) ? _numeralMapping[_expression] : Calculate();
         }
     }
 }
